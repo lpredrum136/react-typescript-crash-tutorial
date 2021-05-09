@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import WelcomeMessage from './WelcomeMessage'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -24,6 +25,8 @@ const Navbar = () => {
 				<Typography variant='h6' className={classes.title}>
 					React TypeScript
 				</Typography>
+
+				<WelcomeMessage username='henry' position='Full-stack Developer' />
 				<Button color='inherit'>Login</Button>
 			</Toolbar>
 		</AppBar>
