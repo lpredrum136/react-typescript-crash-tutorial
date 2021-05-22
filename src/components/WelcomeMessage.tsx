@@ -1,3 +1,5 @@
+import { Box } from '@material-ui/core'
+
 interface WelcomeMessageProps {
 	username: string
 	position:
@@ -13,9 +15,9 @@ const WelcomeMessage = ({
 	country = 'Vietnam'
 }: WelcomeMessageProps) => {
 	return (
-		<p>
+		<Box mb={1}>
 			Welcome {username} - {position} from {country}
-		</p>
+		</Box>
 	)
 }
 

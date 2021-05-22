@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import WelcomeMessage from './WelcomeMessage'
+import { Box, Chip } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -22,12 +23,22 @@ const Navbar = () => {
 	return (
 		<AppBar position='static'>
 			<Toolbar>
-				<Typography variant='h6' className={classes.title}>
-					React TypeScript
-				</Typography>
+				<Box
+					display='flex'
+					justifyContent='space-between'
+					alignItems='center'
+					width={1}
+					py={2}
+				>
+					<Typography variant='h6'>React TypeScript</Typography>
 
-				<WelcomeMessage username='henry' position='Full-stack Developer' />
-				<Button color='inherit'>Login</Button>
+					<Box textAlign='center'>
+						<WelcomeMessage username='henry' position='Full-stack Developer' />
+						<Chip label='Last time working on this project: ' />
+					</Box>
+
+					<Button variant='contained'>Login</Button>
+				</Box>
 			</Toolbar>
 		</AppBar>
 	)
