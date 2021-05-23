@@ -1,12 +1,15 @@
 import React from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
+import ProgressContextProvider from './contexts/ProgressContext'
 
 function App() {
 	return (
 		<div>
-			<Navbar />
-			<header className='App-header'>Hello world</header>
+			<ProgressContextProvider>
+				<Navbar />
+				<header className='App-header'>Hello world</header>
+			</ProgressContextProvider>
 		</div>
 	)
 }
