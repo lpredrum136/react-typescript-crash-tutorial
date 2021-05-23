@@ -17,6 +17,7 @@ import {
 	ProgressContext,
 	ProgressContextDefault
 } from '../contexts/ProgressContext'
+import { ThemeContext, ThemeContextDefault } from '../contexts/ThemeContext'
 
 // const useStyles = makeStyles((theme: Theme) =>
 // 	createStyles({
@@ -49,6 +50,8 @@ const Navbar = () => {
 		ProgressContext
 	) as ProgressContextDefault
 
+	const { theme } = useContext(ThemeContext) as ThemeContextDefault
+
 	// useEffect
 	useEffect(() => {
 		const timer = setInterval(() => setTime(new Date(Date.now())), 1000)
@@ -56,7 +59,7 @@ const Navbar = () => {
 	}, [])
 
 	return (
-		<AppBar position='static'>
+		<AppBar position='static' color={theme}>
 			<Toolbar>
 				<Box
 					display='flex'
