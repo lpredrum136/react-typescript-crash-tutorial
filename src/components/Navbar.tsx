@@ -12,7 +12,7 @@ import {
 	FormControl
 	// InputLabel
 } from '@material-ui/core'
-import { useContext, useState, ChangeEvent } from 'react'
+import { useContext, useState, ChangeEvent, useEffect } from 'react'
 import {
 	ProgressContext,
 	ProgressContextDefault
@@ -42,10 +42,18 @@ const Navbar = () => {
 		setPosition(event.target.value as string)
 	}
 
+	const [time, setTime] = useState<Date>(() => new Date(Date.now()))
+
 	// context
 	const { lastTime, status } = useContext(
 		ProgressContext
 	) as ProgressContextDefault
+
+	// useEffect
+	useEffect(() => {
+		const timer = setInterval(() => setTime(new Date(Date.now())), 1000)
+		return () => clearInterval(timer)
+	}, [])
 
 	return (
 		<AppBar position='static'>
@@ -85,7 +93,12 @@ const Navbar = () => {
 						</Box>
 					</Box>
 
-					<Button variant='contained'>Login</Button>
+					<Box textAlign='center'>
+						<Box my={1}>
+							<Typography variant='h6'>{time.toUTCString()}</Typography>
+						</Box>
+						<Button variant='contained'>Login</Button>
+					</Box>
 				</Box>
 			</Toolbar>
 		</AppBar>
