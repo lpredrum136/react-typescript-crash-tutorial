@@ -2,10 +2,7 @@ import { Box } from '@material-ui/core'
 
 interface WelcomeMessageProps {
 	username: string
-	position:
-		| 'Back-end Developer'
-		| 'Front-end Developer'
-		| 'Full-stack Developer'
+	position: string
 	country?: string
 }
 

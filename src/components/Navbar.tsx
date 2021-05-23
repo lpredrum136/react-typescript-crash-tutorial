@@ -4,8 +4,15 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 // import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import WelcomeMessage from './WelcomeMessage'
-import { Box, Chip } from '@material-ui/core'
-import { useContext } from 'react'
+import {
+	Box,
+	Chip,
+	Select,
+	MenuItem,
+	FormControl
+	// InputLabel
+} from '@material-ui/core'
+import { useContext, useState, ChangeEvent } from 'react'
 import {
 	ProgressContext,
 	ProgressContextDefault
@@ -18,6 +25,9 @@ import {
 // 		},
 // 		title: {
 // 			flexGrow: 1
+// 		},
+// 		position: {
+// 			color: 'white'
 // 		}
 // 	})
 // )
@@ -25,6 +35,14 @@ import {
 const Navbar = () => {
 	// const classes = useStyles()
 
+	// useState
+	const [position, setPosition] = useState<string>('Full-stack Developer')
+
+	const onPositionChange = (event: ChangeEvent<{ value: unknown }>) => {
+		setPosition(event.target.value as string)
+	}
+
+	// context
 	const { lastTime, status } = useContext(
 		ProgressContext
 	) as ProgressContextDefault
@@ -42,10 +60,29 @@ const Navbar = () => {
 					<Typography variant='h6'>React TypeScript</Typography>
 
 					<Box textAlign='center'>
-						<WelcomeMessage username='henry' position='Full-stack Developer' />
+						<WelcomeMessage username='henry' position={position} />
 						<Chip
 							label={`Last time working on this project: ${lastTime} - Status: ${status}`}
 						/>
+						<Box mt={1}>
+							<FormControl>
+								<Select
+									value={position}
+									className='position-select'
+									onChange={onPositionChange}
+								>
+									<MenuItem value='Full-stack Developer'>
+										Full-stack Developer
+									</MenuItem>
+									<MenuItem value='Front-end Developer'>
+										Front-end Developer
+									</MenuItem>
+									<MenuItem value='Back-end Developer'>
+										Back-end Developer
+									</MenuItem>
+								</Select>
+							</FormControl>
+						</Box>
 					</Box>
 
 					<Button variant='contained'>Login</Button>
