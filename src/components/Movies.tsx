@@ -29,7 +29,9 @@ const Movies = () => {
 
 	// context
 	const { theme } = useContext(ThemeContext) as ThemeContextDefault
-	const { movies, addMovie } = useContext(MovieContext) as MovieContextDefault
+	const { movies, addMovie, deleteMovie } = useContext(
+		MovieContext
+	) as MovieContextDefault
 
 	const chipTheme = theme as Exclude<PropTypes.Color, 'inherit'>
 
@@ -61,7 +63,7 @@ const Movies = () => {
 						label={movie.title}
 						clickable
 						color={chipTheme}
-						onDelete={() => console.log('delete')}
+						onDelete={deleteMovie.bind(this, movie.id)}
 						className={classes.movieChip}
 					/>
 				))}

@@ -13,6 +13,7 @@ interface Movie {
 export interface MovieContextDefault {
 	movies: Movie[]
 	addMovie: (title: string) => void
+	deleteMovie: (id: string) => void
 }
 
 export const MovieContext = createContext<MovieContextDefault | null>(null)
@@ -23,9 +24,13 @@ const MovieContextProvider = ({ children }: MovieContextProps) => {
 	const addMovie = (title: string) =>
 		setMovies([...movies, { id: uuidv4(), title }])
 
+	const deleteMovie = (id: string) =>
+		setMovies(movies.filter(movie => movie.id !== id))
+
 	const movieContextData = {
 		movies,
-		addMovie
+		addMovie,
+		deleteMovie
 	}
 
 	return (
