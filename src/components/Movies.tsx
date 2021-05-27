@@ -56,6 +56,7 @@ const Movies = () => {
 					Add
 				</Button>
 			</Box>
+
 			<Box display='flex' justifyContent='center' flexWrap='wrap' mx={5}>
 				{movies.map(movie => (
 					<Chip
