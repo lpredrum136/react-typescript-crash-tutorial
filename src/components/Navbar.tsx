@@ -2,7 +2,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import WelcomeMessage from './WelcomeMessage'
 import {
 	Box,
@@ -19,22 +19,17 @@ import {
 } from '../contexts/ProgressContext'
 import { ThemeContext, ThemeContextDefault } from '../contexts/ThemeContext'
 
-// const useStyles = makeStyles((theme: Theme) =>
-// 	createStyles({
-// 		root: {
-// 			flexGrow: 1
-// 		},
-// 		title: {
-// 			flexGrow: 1
-// 		},
-// 		position: {
-// 			color: 'white'
-// 		}
-// 	})
-// )
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		positionSelect: {
+			color: 'white',
+			borderBottom: '1px solid white'
+		}
+	})
+)
 
 const Navbar = () => {
-	// const classes = useStyles()
+	const classes = useStyles()
 
 	// useState
 	const [position, setPosition] = useState<string>('Full-stack Developer')
@@ -79,7 +74,7 @@ const Navbar = () => {
 							<FormControl>
 								<Select
 									value={position}
-									className='position-select'
+									className={classes.positionSelect}
 									onChange={onPositionChange}
 								>
 									<MenuItem value='Full-stack Developer'>
