@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { ReactNode, useReducer, createContext } from 'react'
 import { topMovieReducer } from '../reducers/TopMovieReducer'
+import topMoviesInfo from '../api/getTopMovies'
 
 interface TopMovieContextProps {
   children: ReactNode
@@ -18,9 +18,7 @@ const TopMovieContextProvider = ({ children }: TopMovieContextProps) => {
   const [topMovies, dispatch] = useReducer(topMovieReducer, [])
 
   const getTopMovies = async () => {
-    const topMovies = await Promise.all([
-      axios.get(`http://www.omdbapi.com/?i=tt3896198&apikey=fe5a9562`)
-    ])
+    const topMovies = await Promise.all(topMoviesInfo)
 
     console.log(topMovies)
   }

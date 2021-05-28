@@ -6,7 +6,7 @@ const TopMovies = () => {
 
   useEffect(() => {
     getTopMovies()
-  }, [])
+  }, [getTopMovies])
 
   return <div>Top Movies</div>
 }
