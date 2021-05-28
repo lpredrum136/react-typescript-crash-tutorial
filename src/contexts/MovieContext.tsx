@@ -16,10 +16,18 @@ export interface MovieContextDefault {
 	deleteMovie: (id: string) => void
 }
 
-export const MovieContext = createContext<MovieContextDefault | null>(null)
+const movieContextDataDefault = {
+	movies: [],
+	addMovie: () => {},
+	deleteMovie: () => {}
+}
+
+export const MovieContext = createContext<MovieContextDefault>(
+	movieContextDataDefault
+)
 
 const MovieContextProvider = ({ children }: MovieContextProps) => {
-	const [movies, setMovies] = useState<Movie[]>([])
+	const [movies, setMovies] = useState<Movie[]>(movieContextDataDefault.movies)
 
 	const addMovie = (title: string) =>
 		setMovies([...movies, { id: uuidv4(), title }])

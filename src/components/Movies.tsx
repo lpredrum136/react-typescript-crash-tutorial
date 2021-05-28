@@ -1,7 +1,7 @@
 import { Box, Button, Chip, PropTypes, TextField } from '@material-ui/core'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { ChangeEvent, Fragment, useContext, useState } from 'react'
-import { MovieContext, MovieContextDefault } from '../contexts/MovieContext'
+import { MovieContext } from '../contexts/MovieContext'
 import { ThemeContext } from '../contexts/ThemeContext'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,9 +29,7 @@ const Movies = () => {
 
 	// context
 	const { theme } = useContext(ThemeContext)
-	const { movies, addMovie, deleteMovie } = useContext(
-		MovieContext
-	) as MovieContextDefault
+	const { movies, addMovie, deleteMovie } = useContext(MovieContext)
 
 	const chipTheme = theme as Exclude<PropTypes.Color, 'inherit'>
 
