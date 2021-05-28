@@ -6,21 +6,26 @@ import ToggleTheme from './components/ToggleTheme'
 import ThemeContextProvider from './contexts/ThemeContext'
 import Movies from './components/Movies'
 import MovieContextProvider from './contexts/MovieContext'
+import TopMovieContextProvider from './contexts/TopMovieContext'
+import TopMovies from './components/TopMovies'
 
 function App() {
-	return (
-		<div>
-			<MovieContextProvider>
-				<ThemeContextProvider>
-					<ProgressContextProvider>
-						<Navbar />
-						<Movies />
-						<ToggleTheme />
-					</ProgressContextProvider>
-				</ThemeContextProvider>
-			</MovieContextProvider>
-		</div>
-	)
+  return (
+    <div>
+      <TopMovieContextProvider>
+        <MovieContextProvider>
+          <ThemeContextProvider>
+            <ProgressContextProvider>
+              <Navbar />
+              <TopMovies />
+              <Movies />
+              <ToggleTheme />
+            </ProgressContextProvider>
+          </ThemeContextProvider>
+        </MovieContextProvider>
+      </TopMovieContextProvider>
+    </div>
+  )
 }
 
 export default App
