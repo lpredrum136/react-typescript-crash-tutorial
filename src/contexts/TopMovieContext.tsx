@@ -1,29 +1,39 @@
 import { ReactNode, useReducer, createContext } from 'react'
-import { topMovieReducer } from '../reducers/TopMovieReducer'
+import { TopMovie, topMovieReducer } from '../reducers/TopMovieReducer'
 import topMoviesInfo from '../api/getTopMovies'
+import { TopMovieActionType } from '../reducers/types'
 
 interface TopMovieContextProps {
   children: ReactNode
 }
 
 interface TopMovieContextDefault {
+  topMovies: TopMovie[]
   getTopMovies: () => Promise<void> // or: () => void
 }
 
+const topMoviesDefault: TopMovie[] = []
+
 export const TopMovieContext = createContext<TopMovieContextDefault>({
+  topMovies: topMoviesDefault,
   getTopMovies: () => Promise.resolve(void 0) // then here it can be () => null or () => {}
 })
 
 const TopMovieContextProvider = ({ children }: TopMovieContextProps) => {
-  const [topMovies, dispatch] = useReducer(topMovieReducer, [])
+  const [topMovies, dispatch] = useReducer(topMovieReducer, topMoviesDefault)
+  const { GET_TOP_MOVIES } = TopMovieActionType
 
   const getTopMovies = async () => {
     const topMovies = await Promise.all(topMoviesInfo)
 
-    console.log(topMovies)
+    dispatch({
+      type: GET_TOP_MOVIES,
+      payload: topMovies.map(topMovie => topMovie.data)
+    })
   }
 
   const topMovieContextData = {
+    topMovies,
     getTopMovies
   }
 
