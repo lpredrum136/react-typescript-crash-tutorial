@@ -10,12 +10,19 @@ export interface ThemeContextDefault {
 	toggleTheme: (theme: PropTypes.Color) => void
 }
 
-export const ThemeContext = createContext<ThemeContextDefault | null>(null)
+const themeContextDataDefault = {
+	theme: 'primary' as PropTypes.Color,
+	toggleTheme: () => {}
+}
+
+export const ThemeContext = createContext<ThemeContextDefault>(
+	themeContextDataDefault
+)
 
 const ThemeContextProvider = ({ children }: ThemeContextProps) => {
-	const defaultTheme: PropTypes.Color = 'primary'
-
-	const [theme, setTheme] = useState<PropTypes.Color>(defaultTheme)
+	const [theme, setTheme] = useState<PropTypes.Color>(
+		themeContextDataDefault.theme
+	)
 
 	const toggleTheme = (theme: PropTypes.Color) => setTheme(theme)
 

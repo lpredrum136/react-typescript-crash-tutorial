@@ -1,7 +1,7 @@
 import { Fab } from '@material-ui/core'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { useContext } from 'react'
-import { ThemeContext, ThemeContextDefault } from '../contexts/ThemeContext'
+import { ThemeContext } from '../contexts/ThemeContext'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -17,7 +17,7 @@ const ToggleTheme = () => {
 	const classes = useStyles()
 
 	// context
-	const { theme, toggleTheme } = useContext(ThemeContext) as ThemeContextDefault
+	const { theme, toggleTheme } = useContext(ThemeContext)
 
 	return (
 		<Fab

@@ -13,11 +13,8 @@ import {
 	// InputLabel
 } from '@material-ui/core'
 import { useContext, useState, ChangeEvent, useEffect } from 'react'
-import {
-	ProgressContext,
-	ProgressContextDefault
-} from '../contexts/ProgressContext'
-import { ThemeContext, ThemeContextDefault } from '../contexts/ThemeContext'
+import { ProgressContext } from '../contexts/ProgressContext'
+import { ThemeContext } from '../contexts/ThemeContext'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -41,11 +38,9 @@ const Navbar = () => {
 	const [time, setTime] = useState<Date>(() => new Date(Date.now()))
 
 	// context
-	const { lastTime, status } = useContext(
-		ProgressContext
-	) as ProgressContextDefault
+	const { lastTime, status } = useContext(ProgressContext)
 
-	const { theme } = useContext(ThemeContext) as ThemeContextDefault
+	const { theme } = useContext(ThemeContext)
 
 	// useEffect
 	useEffect(() => {

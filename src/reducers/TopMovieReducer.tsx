@@ -5,7 +5,6 @@ const { GET_TOP_MOVIES, TOGGLE_TOP_MOVIE_WATCHED } = TopMovieActionType
 export interface TopMovie {
 	imdbID: string
 	Title: string
-	Rating: string
 	Watched: boolean
 }
 
