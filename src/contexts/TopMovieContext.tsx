@@ -1,5 +1,5 @@
 import { ReactNode, useReducer, createContext } from 'react'
-import { TopMovie, topMovieReducer } from '../reducers/TopMovieReducer'
+import { topMovieReducer, TopMovieState } from '../reducers/TopMovieReducer'
 import topMoviesInfo from '../api/getTopMovies'
 import { TopMovieActionType } from '../reducers/types'
 
@@ -8,12 +8,12 @@ interface TopMovieContextProps {
 }
 
 interface TopMovieContextDefault {
-	topMovies: TopMovie[]
+	topMovies: TopMovieState
 	getTopMovies: () => Promise<void> // or: () => void
 	toggleWatched: (id: string) => void
 }
 
-const topMoviesDefault: TopMovie[] = []
+const topMoviesDefault: TopMovieState = []
 
 export const TopMovieContext = createContext<TopMovieContextDefault>({
 	topMovies: topMoviesDefault,

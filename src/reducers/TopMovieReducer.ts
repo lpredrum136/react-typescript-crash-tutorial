@@ -2,11 +2,13 @@ import { TopMovieActionType } from './types'
 
 const { GET_TOP_MOVIES, TOGGLE_TOP_MOVIE_WATCHED } = TopMovieActionType
 
-export interface TopMovie {
+interface TopMovie {
 	imdbID: string
 	Title: string
 	Watched: boolean
 }
+
+export type TopMovieState = TopMovie[]
 
 type TopMovieAction =
 	| {
@@ -15,7 +17,10 @@ type TopMovieAction =
 	  }
 	| { type: typeof TOGGLE_TOP_MOVIE_WATCHED; payload: string }
 
-export const topMovieReducer = (state: TopMovie[], action: TopMovieAction) => {
+export const topMovieReducer = (
+	state: TopMovieState,
+	action: TopMovieAction
+) => {
 	switch (action.type) {
 		case GET_TOP_MOVIES:
 			return action.payload

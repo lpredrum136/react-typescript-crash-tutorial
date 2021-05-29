@@ -15,6 +15,8 @@ import {
 import { useContext, useState, ChangeEvent, useEffect } from 'react'
 import { ProgressContext } from '../contexts/ProgressContext'
 import { ThemeContext } from '../contexts/ThemeContext'
+import Login from './Login'
+import { AuthContext } from '../contexts/AuthContext'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -37,10 +39,17 @@ const Navbar = () => {
 
 	const [time, setTime] = useState<Date>(() => new Date(Date.now()))
 
+	const [loginOpen, setLoginOpen] = useState(false)
+
 	// context
 	const { lastTime, status } = useContext(ProgressContext)
 
 	const { theme } = useContext(ThemeContext)
+
+	const {
+		authInfo: { isAuthenticated },
+		toggleAuth
+	} = useContext(AuthContext)
 
 	// useEffect
 	useEffect(() => {
@@ -61,37 +70,52 @@ const Navbar = () => {
 					<Typography variant='h6'>React TypeScript</Typography>
 
 					<Box textAlign='center'>
-						<WelcomeMessage username='henry' position={position} />
-						<Chip
-							label={`Last time working on this project: ${lastTime} - Status: ${status}`}
-						/>
-						<Box mt={1}>
-							<FormControl>
-								<Select
-									value={position}
-									className={classes.positionSelect}
-									onChange={onPositionChange}
-								>
-									<MenuItem value='Full-stack Developer'>
-										Full-stack Developer
-									</MenuItem>
-									<MenuItem value='Front-end Developer'>
-										Front-end Developer
-									</MenuItem>
-									<MenuItem value='Back-end Developer'>
-										Back-end Developer
-									</MenuItem>
-								</Select>
-							</FormControl>
-						</Box>
+						{isAuthenticated && (
+							<>
+								<WelcomeMessage position={position} />
+								<Chip
+									label={`Last time working on this project: ${lastTime} - Status: ${status}`}
+								/>
+								<Box mt={1}>
+									<FormControl>
+										<Select
+											value={position}
+											className={classes.positionSelect}
+											onChange={onPositionChange}
+										>
+											<MenuItem value='Full-stack Developer'>
+												Full-stack Developer
+											</MenuItem>
+											<MenuItem value='Front-end Developer'>
+												Front-end Developer
+											</MenuItem>
+											<MenuItem value='Back-end Developer'>
+												Back-end Developer
+											</MenuItem>
+										</Select>
+									</FormControl>
+								</Box>
+							</>
+						)}
 					</Box>
 
 					<Box textAlign='center'>
 						<Box my={1}>
 							<Typography variant='h6'>{time.toUTCString()}</Typography>
 						</Box>
-						<Button variant='contained'>Login</Button>
+						<Button
+							variant='contained'
+							onClick={
+								isAuthenticated
+									? toggleAuth.bind(this, '')
+									: setLoginOpen.bind(this, true)
+							}
+						>
+							{isAuthenticated ? 'Logout' : 'Login'}
+						</Button>
 					</Box>
+
+					<Login isOpen={loginOpen} handleClose={setLoginOpen} />
 				</Box>
 			</Toolbar>
 		</AppBar>
